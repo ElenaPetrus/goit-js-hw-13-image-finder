@@ -1,21 +1,22 @@
 const API_KEY = '23028809-0eadab1d20ccc1cb386303aa3';
 const BASE_URL = 'https://pixabay.com/api';
-const options = {
-  headers: {
-    Authorization: API_KEY,
-  },
-};
+// const options = {
+//   headers: {
+//     Authorization: API_KEY,
+//   },
+// };
 
 export default class NewsApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
+    this.perPage = 12;
   }
 
   fetchImages() {
-    const url = `${BASE_URL}/?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=12&key=${API_KEY}`;
+    const url = `${BASE_URL}/?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=${this.perPage}&key=${API_KEY}`;
 
-    return fetch(url, options)
+    return fetch(url)
       .then(response => response.json())
       .then(({ images }) => {
         this.incrementPage();
